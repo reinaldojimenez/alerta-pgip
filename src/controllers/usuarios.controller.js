@@ -20,7 +20,7 @@ const getOneUsuario = async(req, res)=>{
         if (result.length <= 0) {
             return res.status(404).json({message: "usuario no encontrado"});
         }
-        res.json(result);
+        res.json(result[0]);
     } catch (error) {
         res.status(500);
         res.send(error.message);
@@ -30,7 +30,7 @@ const getOneUsuario = async(req, res)=>{
 
 const createNewUsuario = async(req, res)=>{
     try {
-        const { nombre, apellido_paterno, apellido_materno, celular, foto } = req.body;
+        const { nombre, apellido_paterno, apellido_materno, celular, foto, password } = req.body;
         /*const persona ={
             nombre: req.body.nombre,
             apellido_paterno: req.body.apellido_paterno, 
@@ -39,12 +39,12 @@ const createNewUsuario = async(req, res)=>{
             foto: req.body.foto
         }*/
                
-        if (nombre == undefined || apellido_paterno == undefined || apellido_materno == undefined || celular == undefined) {
+        if (nombre == undefined || apellido_paterno == undefined || apellido_materno == undefined || celular == undefined || password == undefined) {
             return res.status(400).json({message: "Peticion erronea. Por favor debe definir todos los campos"})
         }
         
         const usuario = {
-            nombre, apellido_paterno, apellido_materno, celular, foto
+            nombre, apellido_paterno, apellido_materno, celular, foto, password
         }
         const connection = await getConnection();
         //const existeCelular = await connection.query("SELECT COUNT(*) AS TOTAL FROM usuario where celular = ? and estado = 1 limit 1", celular );  

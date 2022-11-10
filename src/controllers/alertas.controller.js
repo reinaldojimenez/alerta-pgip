@@ -22,6 +22,7 @@ const createNewAlerta = async(req, res)=>{
         const detalleAlerta = { usuario_id, alerta_id: newAlerta.insertId, fecha: fechaHora }
         const newDetalleAlerta = await connection.query("INSERT INTO detalle_alerta set ?", detalleAlerta);
 
+        //NOTIFICAR A LOS RESPECTIVOS CONTACTOS
         const respuesta = {
             usuario_id, 
             alerta_id: newAlerta.insertId, 

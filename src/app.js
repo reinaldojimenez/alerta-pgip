@@ -3,6 +3,7 @@ import morgan from "morgan";
 import usuariosRoutes from "./routes/usuarios.routes";
 import contactosRoutes from "./routes/contactos.routes";
 import alertasRoutes from "./routes/alertas.routes";
+import loginRoutes from "./routes/login.routes";
 //import detalleAlertasRoutes from "./routes/detalleAlertas.routes";
 
 const app = express();
@@ -16,6 +17,7 @@ app.use(morgan('dev')); //usar morgan en modo de desarrollo(dev).
 app.use(express.json()); //para que el servidor pueda entender las peticiones en formato json
 
 //Routes
+app.use("/api/v1/login", loginRoutes);
 app.use("/api/v1/usuarios", usuariosRoutes);
 app.use("/api/v1/contactos", contactosRoutes)
 app.use("/api/v1/alertas", alertasRoutes)
